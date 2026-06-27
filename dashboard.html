@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management Dashboard</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    .bg-uitm {
+      background-color: #4b0082;
+    }
+
+    .text-uitm {
+      color: #4b0082;
+    }
+
+    .text-uitm-gold {
+      color: #f6c343;
+    }
+
+    .border-uitm-gold {
+      border-color: #f6c343 !important;
+    }
+
+    .btn-uitm {
+      background-color: #4b0082;
+      border-color: #4b0082;
+      color: #ffffff;
+    }
+
+    .btn-uitm:hover {
+      background-color: #2f0052;
+      border-color: #2f0052;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <nav class="navbar navbar-expand-lg bg-uitm navbar-dark border-bottom border-5 border-uitm-gold">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-semibold" href="dashboard.html">Library Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="members.html">Members</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Books</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Borrowing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Reports</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+          <li class="nav-item"><button id="logoutBtn" class="btn btn-outline-light btn-sm ms-lg-2 mt-2 mt-lg-0">Logout</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 mb-4">
+      <div>
+        <h1 class="h3 mb-1">Dashboard</h1>
+        <p class="text-secondary mb-0">Library Management Dashboard summary</p>
+      </div>
+      <span class="badge bg-uitm align-self-start align-self-md-center">Demo Mode</span>
+    </div>
+
+    <section class="row g-3 mb-4">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <p class="text-secondary mb-1">Total Members</p>
+              <h2 class="h4 mb-0">1,248</h2>
+            </div>
+            <i class="bi bi-people fs-2 text-uitm"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <p class="text-secondary mb-1">Total Books</p>
+              <h2 class="h4 mb-0">5,432</h2>
+            </div>
+            <i class="bi bi-book fs-2 text-uitm-gold"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <p class="text-secondary mb-1">Borrowed Today</p>
+              <h2 class="h4 mb-0">86</h2>
+            </div>
+            <i class="bi bi-arrow-left-right fs-2 text-uitm"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <p class="text-secondary mb-1">Overdue Books</p>
+              <h2 class="h4 mb-0">23</h2>
+            </div>
+            <i class="bi bi-exclamation-circle fs-2 text-uitm-gold"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-4">
+      <div class="col-12 col-lg-8">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-white">
+            <h2 class="h5 mb-0">Monthly Borrowing Trend</h2>
+          </div>
+          <div class="card-body">
+            <canvas id="borrowingChart" height="120"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-white">
+            <h2 class="h5 mb-0">Book Categories</h2>
+          </div>
+          <div class="card-body">
+            <canvas id="categoryChart" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h2 class="h5 mb-0">Recent Borrowing</h2>
+            <button class="btn btn-uitm btn-sm">View Reports</button>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col">Member</th>
+                  <th scope="col">Book Title</th>
+                  <th scope="col">Borrow Date</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Aisyah Rahman</td>
+                  <td>Web Design Essentials</td>
+                  <td>27 Jun 2026</td>
+                  <td><span class="badge text-bg-success">Returned</span></td>
+                </tr>
+                <tr>
+                  <td>Amir Hakim</td>
+                  <td>Introduction to Databases</td>
+                  <td>26 Jun 2026</td>
+                  <td><span class="badge text-bg-warning">Borrowed</span></td>
+                </tr>
+                <tr>
+                  <td>Nur Iman</td>
+                  <td>Information Management</td>
+                  <td>25 Jun 2026</td>
+                  <td><span class="badge text-bg-danger">Overdue</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container pb-4">
+    <p class="text-center text-secondary small mb-0">IMS566 Individual Project - Library Management Dashboard</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>
+    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'index.html';
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+      sessionStorage.removeItem('isLoggedIn');
+      window.location.href = 'index.html';
+    });
+
+    new Chart(document.getElementById('borrowingChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Borrowed Books',
+          data: [180, 220, 260, 210, 300, 340],
+          borderColor: '#4b0082',
+          backgroundColor: 'rgba(75, 0, 130, 0.12)',
+          fill: true,
+          tension: 0.35
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
+    new Chart(document.getElementById('categoryChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Technology', 'Business', 'Education', 'Fiction'],
+        datasets: [{
+          data: [35, 25, 22, 18],
+          backgroundColor: ['#4b0082', '#f6c343', '#6f42c1', '#2f0052']
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+  </script>
+</body>
+</html>
