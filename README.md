@@ -1,256 +1,69 @@
-# IMS566 - Advanced Web Design Development and Content Management
+# CodeIgniter 4 Application Starter
 
-# Individual Project
+## What is CodeIgniter?
 
-## Project Title
+CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
+More information can be found at the [official site](https://codeigniter.com).
 
-**Library Management Dashboard**
+This repository holds a composer-installable app starter.
+It has been built from the
+[development repository](https://github.com/codeigniter4/CodeIgniter4).
 
----
+More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
 
-# Project Description
+You can read the [user guide](https://codeigniter.com/user_guide/)
+corresponding to the latest version of the framework.
 
-Library Management Dashboard is a responsive web application prototype developed for the IMS566 Individual Assignment. The system demonstrates modern web design principles, user interface (UI) design, responsive layout, dashboard visualisation, and content management concepts.
+## Installation & updates
 
-The application allows users to login, navigate through multiple modules, view organised datasets, and analyse information using interactive charts.
+`composer create-project codeigniter4/appstarter` then `composer update` whenever
+there is a new release of the framework.
 
-This project is developed for educational purposes and does not require a backend database. Authentication is simulated using predefined credentials.
+When updating, check the release notes to see if there are any changes you might need to apply
+to your `app` folder. The affected files can be copied or merged from
+`vendor/codeigniter4/framework/app`.
 
----
+## Setup
 
-# Objectives
+Copy `env` to `.env` and tailor for your app, specifically the baseURL
+and any database settings.
 
-* Demonstrate advanced web interface development.
-* Apply responsive web design techniques.
-* Implement dashboard and data visualisation.
-* Organise content using modern UI components.
-* Produce a professional-looking web application prototype.
+## Important Change with index.php
 
----
+`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
+for better security and separation of components.
 
-# System Features
+This means that you should configure your web server to "point" to your project's *public* folder, and
+not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
+framework are exposed.
 
-## Authentication
+**Please** read the user guide for a better explanation of how CI4 works!
 
-* Login Page
-* Register Page (Optional)
-* Hardcoded Authentication
-* Invalid Login Error Message
+## Repository Management
 
----
+We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
+We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
+FEATURE REQUESTS.
 
-## Dashboard
+This repository is a "distribution" one, built by our release preparation script.
+Problems with it can be raised on our forum, or as issues in the main repository.
 
-* Summary Cards
-* Total Members
-* Total Books
-* Borrowing Statistics
-* Monthly Summary
-* Interactive Dashboard
+## Server Requirements
 
----
+PHP version 8.2 or higher is required, with the following extensions installed:
 
-## Navigation Menu
+- [intl](http://php.net/manual/en/intl.requirements.php)
+- [mbstring](http://php.net/manual/en/mbstring.installation.php)
 
-* Dashboard
-* Members
-* Books
-* Borrowing
-* Reports
-* Profile
-* Logout
+> [!WARNING]
+> - The end of life date for PHP 7.4 was November 28, 2022.
+> - The end of life date for PHP 8.0 was November 26, 2023.
+> - The end of life date for PHP 8.1 was December 31, 2025.
+> - If you are still using below PHP 8.2, you should upgrade immediately.
+> - The end of life date for PHP 8.2 will be December 31, 2026.
 
----
+Additionally, make sure that the following extensions are enabled in your PHP:
 
-## Data View Pages
-
-### Members Management
-
-* Member List
-* Search
-* Responsive Table
-
-### Books Management
-
-* Book List
-* Category
-* Status
-* Availability
-
----
-
-## Data Visualisation
-
-Interactive charts using Chart.js:
-
-* Monthly Borrowing Trend
-* Book Categories
-* Active Members
-* Library Statistics
-
----
-
-## Responsive Design
-
-The system supports:
-
-* Desktop
-* Tablet
-* Mobile Device
-
-Built using Bootstrap 5 responsive grid system.
-
----
-
-# Frameworks & Libraries
-
-* HTML5
-* CSS3
-* Bootstrap 5
-* JavaScript
-* Chart.js
-* Bootstrap Icons
-
----
-
-# Project Structure
-
-```text
-project/
-│
-├── index.html
-├── login.html
-├── dashboard.html
-├── members.html
-├── books.html
-├── reports.html
-├── profile.html
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   ├── app.js
-│   └── chart.js
-│
-├── assets/
-│   ├── images/
-│   └── icons/
-│
-└── README.md
-```
-
----
-
-# Login Credentials
-
-Use the following credentials:
-
-**Username**
-
-```
-admin
-```
-
-**Password**
-
-```
-123456
-```
-
-If incorrect credentials are entered, the system will display an error message.
-
----
-
-# User Interface Components
-
-* Login Form
-* Navigation Bar
-* Sidebar Menu
-* Dashboard Cards
-* Responsive Tables
-* Charts
-* Footer
-
----
-
-# Content Management
-
-The application demonstrates good content organisation by:
-
-* Structured page layout
-* Consistent navigation
-* Meaningful page titles
-* Dashboard summaries
-* Metadata organisation
-* Responsive UI components
-
----
-
-# Installation
-
-Clone this repository
-
-```bash
-git clone https://github.com/username/library-dashboard.git
-```
-
-Open
-
-```
-index.html
-```
-
-using Google Chrome.
-
----
-
-# GitHub Repository
-
-```
-https://github.com/username/library-dashboard
-```
-
----
-
-# Live Website
-
-```
-https://username.github.io/library-dashboard
-```
-
----
-
-# Browser Compatibility
-
-* Google Chrome ✅
-* Microsoft Edge ✅
-* Firefox ✅
-
----
-
-# Course Information
-
-**Course**
-
-IMS566 - Advanced Web Design Development and Content Management
-
----
-
-# Author
-
-Student Name : YOUR NAME
-
-Student ID : YOUR STUDENT ID
-
-Faculty : Faculty of Information Management
-
-Universiti Teknologi MARA (UiTM)
-
-Semester : 2025/2026
-
----
-
-# Disclaimer
-
-This project is developed solely for academic purposes as part of the IMS566 Individual Assignment.
+- json (enabled by default - don't turn it off)
+- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
+- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
